@@ -26,6 +26,11 @@ pipeline{
             steps{
                 build job: 'LAUNCH'
             }
+        when {
+                expression {
+                    return params.pipeAction == 'Destroy'
+                }
+            }
             steps {
                 sh "docker container stop python_service"
             }
