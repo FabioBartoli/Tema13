@@ -1,15 +1,10 @@
-pipeline{
+pipeline {
     agent any
-    stages{
-        stage('Build'){
-            steps{
-                build job: 'BAKE'
-            }
-        }
 
-        stage('Deploy'){
-            steps{
-                build job: 'LAUNCH'
+    stages {
+        stage('Deploy - Docker Image') {
+            steps {
+                sh "docker run --name python_service -p 8080:8080 trilhajt/pythonserver:1.0"              
             }
         }
     }
