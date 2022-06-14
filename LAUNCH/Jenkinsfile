@@ -1,0 +1,16 @@
+pipeline {
+    agent any
+
+    stages {
+        stage('Deploy - Docker Image') {
+            steps {
+                sh "docker run --name python_service trilhajt/pythonserver"              
+            }
+        }
+
+    post {
+        always {
+            archiveArtifacts artifacts: 'artefatosDeploy.txt'
+        }
+    }
+}

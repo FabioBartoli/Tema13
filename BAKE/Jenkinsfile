@@ -1,0 +1,16 @@
+pipeline {
+    agent any
+
+    stages {
+        stage('Packer - Bake Docker Image') {
+            steps {
+                sh "packer build bake-docker.pkr.hcl"              
+            }
+        }
+
+    post {
+        always {
+            archiveArtifacts artifacts: 'artefatosBuild.txt'
+        }
+    }
+}
