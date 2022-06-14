@@ -8,10 +8,10 @@ pipeline {
             }
         }
 
-    post {
-        always {
-            archiveArtifacts artifacts: 'artefatosBuild.txt'
+        post {
+            always {
+                archiveArtifacts artifacts: 'artefatosBuild.txt'
+            }
         }
-    }
     }
 }
