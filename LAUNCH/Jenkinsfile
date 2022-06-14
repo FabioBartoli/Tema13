@@ -7,11 +7,5 @@ pipeline {
                 sh "docker run --name python_service trilhajt/pythonserver"              
             }
         }
-
-        post {
-            always {
-                archiveArtifacts artifacts: 'artefatosDeploy.txt'
-            }
-        }
     }
 }

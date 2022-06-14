@@ -7,11 +7,5 @@ pipeline {
                 sh "packer build bake-docker.pkr.hcl"              
             }
         }
-
-        post {
-            always {
-                archiveArtifacts artifacts: 'artefatosBuild.txt'
-            }
-        }
     }
 }
