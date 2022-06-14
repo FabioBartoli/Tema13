@@ -12,18 +12,26 @@ source "docker" "python_server" {
   commit = true
   changes = [
     "WORKDIR /app",
-    "VOLUME ./app /app",
-    "EXPOSE 8080",
-    "ONBUILD RUN pip install -r requirements.txt",
-    "CMD [\"python3\", \"rw-env.py;\"]"
+    "ENTRYPOINT python3 /app/rw-envs.py"
   ]
 }
 
 build {
   name    = "build-docker-trilha"
   sources = ["source.docker.python_server"]
-  provisioner "shell-local" {
-    inline = ["docker build -t trilhajt/pythonserver ."]
+  provisioner "file" {
+    source = "./app"
+    destination = "/app/"
+  }
+  provisioner "shell" {
+    inline = ["pip install -r /app/requirements.txt"]
+  }
+  provisioner "shell" {
+    inline = ["chmod a+x /app/rw-envs.py"]
+  }
+    post-processor "docker-tag" {
+    repository = "trilhajt/pythonserver"
+    tag        = ["1.0"]
   }
 }
 
