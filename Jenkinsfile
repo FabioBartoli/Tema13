@@ -17,7 +17,7 @@ pipeline{
             }
         }
 
-        stage('Deploy'){
+        stage('Destroy'){
         when {
                 expression {
                     return params.pipeAction == 'Destroy'
@@ -25,6 +25,7 @@ pipeline{
             }
             steps {
                 sh "docker container stop python_service"
+                sh "docker image remove trilhajt/pythonserver:1.0 --force"
             }
         }
 
