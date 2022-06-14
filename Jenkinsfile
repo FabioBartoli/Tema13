@@ -3,7 +3,7 @@ pipeline{
     stages{
         stage('Build'){
             steps{
-                build job: 'BAKE', parameters: [string(name: 'BAKE', value:'')]
+                build job: 'BAKE'
             }
         }
 
